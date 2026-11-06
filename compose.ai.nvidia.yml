@@ -5,7 +5,7 @@
 # If you have some troubles, check settings.
 # If settings are ok, call 8-800-DevOpsSaveYourAss
 #
-# First run:  docker compose -f compose.ai.nvidia.yml up        # the first start downloads the model (resumable)
+# First run:  docker compose -f compose.ai.nvidia.yml up strata        # the first start downloads the model (resumable)
 # Common run: docker compose -f compose.ai.nvidia.yml up -d
 #
 # Strata on an NVIDIA card (RTX 20 to 50, and older cards with the cuda12 image). Needs the NVIDIA Container Toolkit on the host.
@@ -67,6 +67,13 @@ services:
       memlock: { soft: -1, hard: -1 }        # the engine pins tens of GB of RAM
     shm_size: 2gb
     stop_grace_period: 2m                    # the model drains and unloads on docker stop
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+      start_period: 600s
+      start_interval: 5s
     
   gateway:
     # build:                                     # You should clone original hermes-agenmt repository into this directory. After that uncomment HERMES_IMAGE in env.
@@ -77,7 +84,9 @@ services:
     restart: unless-stopped
     network_mode: host
     depends_on:
-      - strata
+      strata:
+        condition: service_healthy
+        restart: true
     volumes:
       - type: volume
         source: hermes
@@ -117,7 +126,8 @@ services:
     restart: unless-stopped
     network_mode: host
     depends_on:
-      - gateway
+      gateway:
+        condition: service_started
     volumes:
       - type: volume
         source: hermes
