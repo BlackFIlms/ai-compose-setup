@@ -1,0 +1,5 @@
+model:
+  provider: custom
+  model: my-model
+  base_url: http://vllm:8000/v1
+  api_key: "none"
