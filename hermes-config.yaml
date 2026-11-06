@@ -1,5 +1,5 @@
 model:
   provider: custom
-  model: my-model
-  base_url: http://vllm:8000/v1
-  api_key: "none"
+  model: IQ2_XS
+  base_url: http://strata:8000/v1
+  api_key: "put-a-long-random-key-here"
