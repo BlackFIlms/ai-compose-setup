@@ -66,7 +66,7 @@ services:
     stop_grace_period: 2m
     # security_opt: [seccomp:unconfined]     # only if the log says a ROCm call was blocked (rare)p
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "/bin/bash", "-c", ":</dev/tcp/127.0.0.1/8080"]
       interval: 1m30s
       timeout: 60s
       retries: 10

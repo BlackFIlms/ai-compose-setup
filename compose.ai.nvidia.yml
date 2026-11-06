@@ -68,7 +68,7 @@ services:
     shm_size: 2gb
     stop_grace_period: 2m                    # the model drains and unloads on docker stop
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "/bin/bash", "-c", ":</dev/tcp/127.0.0.1/8080"]
       interval: 1m30s
       timeout: 60s
       retries: 10
