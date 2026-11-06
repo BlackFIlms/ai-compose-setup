@@ -5,7 +5,7 @@
 # If you have some troubles, check settings.
 # If settings are ok, call 8-800-DevOpsSaveYourAss
 #
-# First run:  docker compose -f compose.ai.nvidia.yml logs -f        # the first start downloads the model (resumable)
+# First run:  docker compose -f compose.ai.nvidia.yml up        # the first start downloads the model (resumable)
 # Common run: docker compose -f compose.ai.nvidia.yml up -d
 #
 # Strata on an NVIDIA card (RTX 20 to 50, and older cards with the cuda12 image). Needs the NVIDIA Container Toolkit on the host.
@@ -13,9 +13,6 @@
 # Images: ghcr.io/niko1221/strata (published from 0.2.1 on). To use one you built yourself: STRATA_IMAGE=strata:0.2.7-<flavor> docker compose up -d
 #
 # Hermes Agent
-#
-# Usage:
-#   HERMES_UID=$(id -u) HERMES_GID=$(id -g) docker compose up -d
 #
 # Set HERMES_UID / HERMES_GID to the host user that owns ~/.hermes so
 # files created inside the container stay readable/writable on the host.
