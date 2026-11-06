@@ -67,8 +67,8 @@ services:
     stop_grace_period: 2m
     
   gateway:
-    build: .
-    image: hermes-agent
+    #build: ./hermes-agent                                     # You should clone original hermes-agenmt repository into this directory. After that uncomment HERMES_IMAGE in env.
+    image: ${HERMES_IMAGE:-hermes-agent:v0.23.0}
     container_name: hermes
     restart: unless-stopped
     network_mode: host
@@ -106,7 +106,7 @@ services:
     command: ["gateway", "run"]
 
   dashboard:
-    image: hermes-agent
+    image: ${HERMES_IMAGE:-hermes-agent:v0.23.0}
     container_name: hermes-dashboard
     restart: unless-stopped
     network_mode: host
