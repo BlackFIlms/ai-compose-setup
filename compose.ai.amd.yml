@@ -68,7 +68,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080"]
       interval: 1m30s
-      timeout: 10s
+      timeout: 60s
       retries: 10
       start_period: 600s                     # Maybe need tune it for you hardware and model (Watch how long strata loading model.)
       start_interval: 5s
