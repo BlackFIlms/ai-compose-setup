@@ -71,6 +71,8 @@ services:
     container_name: hermes
     restart: unless-stopped
     network_mode: host
+    depends_on:
+      - strata
     volumes:
       - type: volume
         source: hermes
