@@ -75,7 +75,7 @@ services:
     # build:                                     # You should clone original hermes-agenmt repository into this directory. After that uncomment HERMES_IMAGE in env.
     #   context: ./hermes-agent/
     #   dockerfile: ./Dockerfile
-    image: ${HERMES_IMAGE:-hermes-agent:v0.23.0}
+    image: ${HERMES_IMAGE:-nousresearch/hermes-agent:v0.23.0}
     container_name: hermes
     restart: unless-stopped
     network_mode: host
@@ -113,7 +113,7 @@ services:
     command: ["gateway", "run"]
 
   dashboard:
-    image: ${HERMES_IMAGE:-hermes-agent:v0.23.0}
+    image: ${HERMES_IMAGE:-nousresearch/hermes-agent:v0.23.0}
     container_name: hermes-dashboard
     restart: unless-stopped
     network_mode: host
