@@ -38,7 +38,7 @@
 #
 services:
   strata:
-    image: ${STRATA_IMAGE:-ghcr.io/niko1221/strata:0.2.7-cuda13}
+    image: ${STRATA_IMAGE:-ghcr.io/niko1221/strata:0.2.7-sycl}
     container_name: strata
     restart: unless-stopped
     ports:
