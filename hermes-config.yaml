@@ -1,5 +1,5 @@
 model:
   provider: custom
   model: IQ2_XS
-  base_url: http://strata:8000/v1
+  base_url: http://127.0.0.1:8000/v1
   api_key: "put-a-long-random-key-here"
