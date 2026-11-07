@@ -5,8 +5,8 @@
 # If you have some troubles, check settings.
 # If settings are ok, call 8-800-DevOpsSaveYourAss
 #
-# First run:  docker compose -f compose.ai.intel.yml up strata        # the first start downloads the model (resumable)
-# Common run: docker compose -f compose.ai.intel.yml up -d
+# First run:  docker compose -f compose.ai.strata_hermes.intel.yml up strata        # the first start downloads the model (resumable)
+# Common run: docker compose -f compose.ai.strata_hermes.intel.yml up -d
 #
 # Strata on an Intel Arc card (A-series or B-series, including Arc Pro B70). Needs the xe or i915 kernel driver on the host.
 # The Level Zero loader and Intel's compute runtime are in the image (Ubuntu 26.04 based).

@@ -5,8 +5,8 @@
 # If you have some troubles, check settings.
 # If settings are ok, call 8-800-DevOpsSaveYourAss
 #
-# First run:  docker compose -f compose.ai.nvidia.yml up strata        # the first start downloads the model (resumable)
-# Common run: docker compose -f compose.ai.nvidia.yml up -d
+# First run:  docker compose -f compose.ai.strata_hermes.nvidia.yml up strata        # the first start downloads the model (resumable)
+# Common run: docker compose -f compose.ai.strata_hermes.nvidia.yml up -d
 #
 # Strata on an NVIDIA card (RTX 20 to 50, and older cards with the cuda12 image). Needs the NVIDIA Container Toolkit on the host.
 # Image: cuda13 for RTX 20-50 with driver 580 or newer; cuda12 for Pascal / Volta (GTX 10, Tesla P100, V100) or drivers 575-579.
