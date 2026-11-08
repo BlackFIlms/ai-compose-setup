@@ -36,6 +36,19 @@
 #     and API_SERVER_HOST. See docs/user-guide/api-server.md before doing
 #     this on an internet-facing host.
 #
+# hermes WARNING hermes_plugins.platforms__matrix.adapter: Matrix: dropping encrypted messages this process has no E2EE decryptor. 
+#    Install with: pip install 'mautrix[encryption]' asyncpg aiosqlite  (requires libolm C library), then set MATRIX_E2EE_MODE=optional (or required). Without it, messages in encrypted rooms never reach the agent.
+#    apt install python3-matrix-common python3-asyncpg python3-aiosqlite
+#    RECOMENDATION: customise docker image. Use via derictive FROM nousresearch/hermes-agent:v0.23.0
+#                   OR rebuild from repository: docker build -t custom-hermes-agent:v0.23.0 -f custom-hermes-agent.Dockerfile ./hermes-agent
+#                   If you want rebuild from repository - you should modify Dockerfile!
+#
+# n8n
+#
+# After run n8n connect to hermes via dashboard->MCP->Add server(On top) and add connection to your n8n manually with API(bearer) token auth.
+# And url: http://n8n:5678/mcp-server/http
+# If you don't need it, just disable it.
+# 
 services:
   strata:
     image: ${STRATA_IMAGE:-ghcr.io/niko1221/strata:0.2.7-sycl}
