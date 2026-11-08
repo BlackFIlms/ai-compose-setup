@@ -1,0 +1,157 @@
+= ai-compose-setup
+:toc: macro
+:toc-title: Table of content
+
+== About 
+
+**ai-compose-setup** is project which contains tested examples of configurations for simple run next **AI** setups:
+
+- https://github.com/ollama/ollama/blob/main/docs/docker.mdx[Ollama] + https://github.com/NousResearch/hermes-agent/blob/main/docker-compose.yml[Hermes] + https://github.com/n8n-io/n8n/blob/master/docker/get-n8n-compose.yml[N8N]
+- https://github.com/Niko1221/Strata/blob/main/docs/DOCKER.md[Strata] + https://github.com/NousResearch/hermes-agent/blob/main/docker-compose.yml[Hermes] + https://github.com/n8n-io/n8n/blob/master/docker/get-n8n-compose.yml[N8N]
+
+toc::[]
+
+== How to run?
+
+[.text-left]
+--
+. Verify, what you system has minimal dependencies, like git, docker, docker compose.
+. Clone repository.
+. cd into cloned repository.
++
+[source,shell]
+----
+cd ./ai-compose-setup
+----
++
+. Chose one of the provided setups, which you want to launch.
++
+[NOTE]
+====
+ALL next commands in that README, are writen relatively ROOT of that repo for understood. +
+If you want you can rename compose files and cd into chosen setup. +
+And main example provided only for nvidia hardware. +
+Detailed README maybe be writen later.
+====
++
+. After clone repository, edit minimal configuration for got working **AI** setup
+.. Open .env and set next variables - it's required
+[lowergreek]
+... If use **Ollama + Hermes + N8N**
++
+[source,file]
+.ollama_hermes/.env
+----
+WIP
+----
+... If use **Strata + Hermes + N8N**
++
+[source,file]
+.strata_hermes/.env
+----
+# STRATA ENV
+MODEL=
+# HERMES ENV
+HERMES_DASHBOARD_SESSION_TOKEN='put-a-long-random-key-here'
+HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH='scrypt$salt$PUT-HERE-somehash'
+HERMES_DASHBOARD_BASIC_AUTH_SECRET='put-a-long-random-key-here'
+# N8N ENV
+N8N_RUNNERS_AUTH_TOKEN=put-a-long-random-key-here
+SEARXNG_SECRET=put-a-long-random-key-here
+SANDBOX_API_KEYS=put-a-long-random-key-here_SANDBOX_API_KEYS
+N8N_SANDBOX_SERVICE_API_KEY=put-a-long-random-key-here_SANDBOX_API_KEYS
+SANDBOX_API_RUNNER_API_KEY=put-a-long-random-key-here_SANDBOX_API_RUNNER_API_KEY
+SANDBOX_RUNNER_API_KEYS=put-a-long-random-key-here_SANDBOX_API_RUNNER_API_KEY
+SANDBOX_RUNNER_REGISTRATION_TOKEN=put-a-long-random-key-here_SANDBOX_RUNNER_REGISTRATION_TOKEN
+SANDBOX_API_RUNNER_REGISTRATION_TOKEN=put-a-long-random-key-here_SANDBOX_RUNNER_REGISTRATION_TOKEN
+----
++
+IMPORTANT: In n8n tokens has tokens which should be same! I mark it with same endings! +
+_like: _SANDBOX_API_KEYS_
++
+[TIP]
+====
+i mark instruments for generate some hashes and tokens in `.env`. +
+But i think, what i need duplicate it here!
+
+You can use:
+
+- `openssl rand -hex 24` - simple
+- `openssl rand -base64 32` - more strong
+- `HASH=$(python -c "from plugins.dashboard_auth.basic import hash_password; print(hash_password('choose-a-strong-password'))")` - use only for hashed passwords. +
+_for example: HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH_ +
+And you can run it hash generator, only from `hermes-agent` directory _in that project context_.
+====
+. Chose one of provided compose file, which prepared for described hardware. +
+like:
++
+- `strata_hermes/compose.ai.strata_hermes.amd.yml`
+- `strata_hermes/compose.ai.strata_hermes.nvidia.yml`
+. First run compose!
+[lowergreek]
+.. **Ollama + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f ollama_hermes/compose.ai.ollama_hermes.nvidia.yml up ollama
+----
+.. **Strata + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml up strata
+----
+. Check what model provider is started succesfully and you don't have errors!
+[lowergreek]
+.. **Ollama + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f ollama_hermes/compose.ai.ollama_hermes.nvidia.yml ps
+docker compose -f ollama_hermes/compose.ai.ollama_hermes.nvidia.yml logs -f ollama
+----
+.. **Strata + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml ps
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml logs -f strata
+----
++
+IMPORTANT: At that step, you should downloads the model (resumable).
+. If all right and you done prepare providers, stop compose
+[lowergreek]
+.. **Ollama + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f ollama_hermes/compose.ai.ollama_hermes.nvidia.yml down
+----
+.. **Strata + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml down
+----
+. When it stops, run as daemon.
+[lowergreek]
+.. **Ollama + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f ollama_hermes/compose.ai.ollama_hermes.nvidia.yml up -d
+# And watch logs again)
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml logs -f
+----
+.. **Strata + Hermes + N8N**
++
+[source,shell]
+----
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml up -d
+# And watch logs again)
+docker compose -f strata_hermes/compose.ai.strata_hermes.nvidia.yml logs -f
+----
+--
+
+== Troubleshooting
+WIP
