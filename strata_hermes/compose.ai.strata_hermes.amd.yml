@@ -93,7 +93,7 @@ services:
     image: ${HERMES_IMAGE:-nousresearch/hermes-agent:v0.23.0}
     container_name: hermes
     restart: unless-stopped
-    network_mode: host
+    #network_mode: host
     depends_on:
       strata:
         condition: service_healthy
