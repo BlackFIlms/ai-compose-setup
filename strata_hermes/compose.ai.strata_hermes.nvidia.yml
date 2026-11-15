@@ -96,6 +96,8 @@ services:
     container_name: hermes
     restart: unless-stopped
     #network_mode: host
+    ports:
+      - "${HERMES_BIND:-127.0.0.1}:${HERMES_DASHBOARD_PORT:-9119}:9119"      # 127.0.0.1 = this computer only. 0.0.0.0 = your network: keep the API key then.
     depends_on:
       strata:
         condition: service_healthy
@@ -104,6 +106,7 @@ services:
       - type: volume
         source: hermes
         target: /opt/data
+      # If enabled - you can't enable plugins with err: cannot recover dependency publication: /opt/data/installs/351f81cc06284494/publication.json: [Errno 16] Device or resource busy: '/opt/data/.publish-70yt1l68' -> '/opt/data/config.yaml'
       - type: bind
         source: ./hermes-config.yaml
         target: /opt/data/config.yaml
