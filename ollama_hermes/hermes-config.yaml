@@ -1,0 +1,50 @@
+model:
+  provider: custom
+  base_url: http://ollama:11434/v1
+  api_key: "none"
+  default: gemma4:26b-a4b-it-q4_K_M
+_config_version: 53
+agent:
+  max_turns: 150
+  reasoning_echo: true
+telemetry:
+  shared_metrics:
+    enabled: true
+    send: true
+    offer_version: 2
+auxiliary:
+  vision:
+    provider: custom
+    model: gemma4:26b-a4b-it-q4_K_M
+  mcp:
+    provider: custom
+    model: gemma4:26b-a4b-it-q4_K_M
+  review:
+    provider: custom
+    model: gemma4:31b-it-q4_K_M
+  curator:
+    provider: custom
+    model: gemma4:31b-it-q4_K_M
+  kanban_decomposer:
+    provider: custom
+    model: gemma4:31b-it-q4_K_M
+platforms:
+  a2a:
+    enabled: true
+monitoring:
+  gateway_health_export:
+    enabled: true
+streaming:
+  enabled: true
+kanban:
+  max_in_progress: '2'
+  auto_decompose: true
+mcp_servers:
+  n8n:
+    headers:
+      Authorization: Bearer ${MCP_N8N_API_KEY}
+    url: http://n8n:5678/mcp-server/http
+dashboard:
+  show_token_analytics: true
+  theme: mono
+  font: system-sans
