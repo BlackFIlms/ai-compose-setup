@@ -58,7 +58,7 @@ services:
       - "${OLLAMA_BIND:-127.0.0.1}:${OLLAMA_PORT:-11434}:11434"      # 127.0.0.1 = this computer only. 0.0.0.0 = your network: keep the API key then.
     volumes:
       - ollama_data:/root/.ollama
-      - /docker/AI/models/ollama:/root/.ollama/models                # WARN: Don't make it for read-only! In that case ollama doesn't started.
+      - /srv/models/ollama:/root/.ollama/models                # WARN: Don't make it for read-only! In that case ollama doesn't started.
     environment:
       - OLLAMA_CONTEXT_LENGTH=${OLLAMA_CONTEXT_LENGTH:-64000}
     deploy:
